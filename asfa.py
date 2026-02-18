@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ekspansi Global Mixue</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;family=Montserrat:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<!-- ECharts Main Library -->
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+<!-- ECharts World Map Data -->
+<script src="https://cdn.jsdelivr.net/npm/echarts@4.9.0/map/js/world.js"></script>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f3f4f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            background-color: #ffffff;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Mixue Brand Colors */
+        .text-mixue-red { color: #E31E24; }
+        .bg-mixue-red { background-color: #E31E24; }
+        .border-mixue-red { border-color: #E31E24; }
+
+        .header-bar {
+            height: 12px;
+            background-color: #E31E24;
+            width: 100%;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            padding: 3rem 4rem;
+            gap: 3rem;
+        }
+
+        .left-panel {
+            width: 35%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 2rem;
+            z-index: 10;
+        }
+
+        .right-panel {
+            width: 65%;
+            background-color: #f8fafc;
+            border-radius: 20px;
+            padding: 0;
+            position: relative;
+            border: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .slide-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #1f2937;
+            line-height: 1.1;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.25rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border-left: 5px solid #E31E24;
+            transition: transform 0.3s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-value {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #E31E24;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #64748b;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        /* Timeline Styling */
+        .timeline-item {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .timeline-dot {
+            width: 12px;
+            height: 12px;
+            background-color: #E31E24;
+            border-radius: 50%;
+            margin-top: 6px;
+            flex-shrink: 0;
+            box-shadow: 0 0 0 4px rgba(227, 30, 36, 0.2);
+        }
+
+        .timeline-content h4 {
+            font-weight: 700;
+            color: #334155;
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        .timeline-content p {
+            color: #64748b;
+            font-size: 0.95rem;
+            margin: 4px 0 0 0;
+            line-height: 1.5;
+        }
+
+        #map-container {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Legend */
+        .map-legend {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            z-index: 20;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .legend-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 3px;
+        }
+
+        /* Decoration */
+        .bg-pattern {
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 300px;
+            height: 300px;
+            background-color: rgba(227, 30, 36, 0.03);
+            border-radius: 50%;
+            z-index: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Background Decor -->
+<div class="header-bar"></div>
+<div class="bg-pattern"></div>
+<div class="main-content">
+<!-- Left Panel: Information -->
+<div class="left-panel">
+<div>
+<h1 class="slide-title">Ekspansi Global <span class="text-mixue-red">Mixue</span></h1>
+<p class="text-gray-500 text-lg font-light">Dari Zhengzhou ke Panggung Dunia</p>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="stat-card">
+<p class="stat-value">2018</p>
+<p class="stat-label">Tahun Pertama<br/>Global (Vietnam)</p>
+</div>
+<div class="stat-card">
+<p class="stat-value">5.000+</p>
+<p class="stat-label">Total Toko<br/>Luar China (2025)</p>
+</div>
+</div>
+<div class="space-y-6 mt-2">
+<div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-content">
+<h4>Cakupan Pasar Luas</h4>
+<p>Hadir di 12+ negara: Asia Tenggara, Korea, Jepang, Australia, hingga Eropa.</p>
+</div>
+</div>
+<div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-content">
+<h4>Strategi Lokalisasi</h4>
+<p>Adaptasi menu lokal dengan tetap mempertahankan strategi <i>Cost Leadership</i> dan harga terjangkau.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Panel: Map Visualization -->
+<div class="right-panel">
+<div id="map-container"></div>
+<!-- Legend -->
+<div class="map-legend">
+<div class="legend-item">
+<div class="legend-color" style="background-color: #991b1b;"></div>
+<span class="text-xs font-bold text-gray-700">China (HQ)</span>
+</div>
+<div class="legend-item">
+<div class="legend-color" style="background-color: #E31E24;"></div>
+<span class="text-xs font-semibold text-gray-700">Pasar Ekspansi</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var chartDom = document.getElementById('map-container');
+            var myChart = echarts.init(chartDom);
+            var option;
+
+            option = {
+                backgroundColor: '#f8fafc',
+                geo: {
+                    map: 'world',
+                    roam: false,
+                    zoom: 1.6,
+                    center: [115, 10], // Centered roughly around SEA/China
+                    label: {
+                        show: false
+                    },
+                    itemStyle: {
+                        normal: {
+                            areaColor: '#e2e8f0',
+                            borderColor: '#ffffff',
+                            borderWidth: 1.5
+                        },
+                        emphasis: {
+                            areaColor: '#cbd5e1'
+                        }
+                    },
+                    regions: [
+                        { name: 'China', itemStyle: { areaColor: '#991b1b' } }, // Darker red for HQ
+                        { name: 'Vietnam', itemStyle: { areaColor: '#E31E24' } },
+                        { name: 'Indonesia', itemStyle: { areaColor: '#E31E24' } },
+                        { name: 'Laos', itemStyle: { areaColor: '#E31E24' } },
+                        { name: 'Malaysia', itemStyle: { areaColor: '#E31E24' } },
+                        { name: 'Singapore', itemStyle: { areaColor: '#E31E24' } },
+                        { name: 'Philippines', itemStyle: { areaColor: '#E31E24' } },
+                        { name: 'Cambodia', itemStyle: { areaColor: '#E31E24' } },
+                        { name: 'Thailand', itemStyle: { areaColor: '#E31E24' } },
+                        { name: 'Korea', itemStyle: { areaColor: '#f87171' } },
+                        { name: 'Japan', itemStyle: { areaColor: '#f87171' } },
+                        { name: 'Australia', itemStyle: { areaColor: '#fca5a5' } }
+                    ]
+                },
+                series: [
+                    {
+                        name: 'Locations',
+                        type: 'effectScatter',
+                        coordinateSystem: 'geo',
+                        rippleEffect: {
+                            brushType: 'stroke',
+                            scale: 4,
+                            period: 4
+                        },
+                        symbolSize: 8,
+                        data: [
+                            { name: 'Zhengzhou (HQ)', value: [113.6253, 34.7466] },
+                            { name: 'Hanoi', value: [105.8542, 21.0285] },
+                            { name: 'Jakarta', value: [106.8456, -6.2088] },
+                            { name: 'Tokyo', value: [139.6917, 35.6895] },
+                            { name: 'Sydney', value: [151.2093, -33.8688] }
+                        ],
+                        itemStyle: {
+                            color: '#ffffff',
+                            shadowBlur: 10,
+                            shadowColor: '#333'
+                        },
+                        zlevel: 1
+                    }
+                ]
+            };
+
+            myChart.setOption(option);
+            
+            // Handle Resize
+            window.addEventListener('resize', function() {
+                myChart.resize();
+            });
+        });
+    </script>
+</body>
+</html>
