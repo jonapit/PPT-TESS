@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="id">
 <head>
 <meta charset="utf-8"/>
@@ -8,9 +7,7 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;family=Montserrat:wght@700;800&amp;display=swap" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
-<!-- ECharts Main Library -->
 <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
-<!-- ECharts World Map Data -->
 <script src="https://cdn.jsdelivr.net/npm/echarts@4.9.0/map/js/world.js"></script>
 <style>
         body {
@@ -192,11 +189,9 @@
 </head>
 <body>
 <div class="slide-container">
-<!-- Background Decor -->
 <div class="header-bar"></div>
 <div class="bg-pattern"></div>
 <div class="main-content">
-<!-- Left Panel: Information -->
 <div class="left-panel">
 <div>
 <h1 class="slide-title">Ekspansi Global <span class="text-mixue-red">Mixue</span></h1>
@@ -229,10 +224,8 @@
 </div>
 </div>
 </div>
-<!-- Right Panel: Map Visualization -->
 <div class="right-panel">
 <div id="map-container"></div>
-<!-- Legend -->
 <div class="map-legend">
 <div class="legend-item">
 <div class="legend-color" style="background-color: #991b1b;"></div>
@@ -256,7 +249,7 @@
                 backgroundColor: '#f8fafc',
                 geo: {
                     map: 'world',
-                    roam: false,
+                    roam: true,  // <--- INI SAYA UBAH JADI TRUE (BIAR BISA ZOOM)
                     zoom: 1.6,
                     center: [115, 10], // Centered roughly around SEA/China
                     label: {
